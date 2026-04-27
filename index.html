@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crucero Norte | Restobar Antofagasta</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:ital,wght@0,700;1,700&display=swap" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Montserrat', 'sans-serif'],
+                        'serif': ['Playfair Display', 'serif'],
+                    },
+                    colors: {
+                        'turquesa': '#40E0D0',
+                        'naranja': '#E9692C',
+                        'marino': '#0A1A2F',
+                        'oscuro': '#050A0F',
+                        'dorado': '#C5A059'
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* --- ESTILOS BASE Y SCROLL --- */
+        html { scroll-behavior: smooth; }
+        .glass { background: rgba(5, 10, 15, 0.8); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); }
+        .parallax-window { background-attachment: fixed; background-position: center; background-size: cover; }
+
+        /* --- CURSOR PREMIUM --- */
+        @media (min-width: 768px) {
+            body { cursor: none; }
+            a, button, .cursor-pointer { cursor: none; }
+            .cursor-dot {
+                width: 8px; height: 8px; background: #40E0D0;
+                position: fixed; pointer-events: none; z-index: 9999;
+                border-radius: 50%; transform: translate(-50%, -50%);
+            }
+            .cursor-outline {
+                width: 40px; height: 40px; border: 1.5px solid #40E0D0;
+                position: fixed; pointer-events: none; z-index: 9998;
+                border-radius: 50%; transform: translate(-50%, -50%);
+                transition: all 0.15s ease-out;
+            }
+            .cursor-active {
+                transform: translate(-50%, -50%) scale(1.6);
+                background: rgba(64, 224, 208, 0.15);
+                border-color: transparent;
+            }
+        }
+        @media (max-width: 767px) { .cursor-dot, .cursor-outline { display: none; } }
+
+        /* --- ANIMACIONES --- */
+        .text-fade { display: none; animation: fadeUpDown 4s infinite; }
+        .text-fade.active { display: block; }
+        @keyframes fadeUpDown {
+            0% { opacity: 0; transform: translateY(15px); }
+            10% { opacity: 1; transform: translateY(0); }
+            90% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(-15px); }
+        }
+
+        @keyframes softFloat {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.08); }
+            100% { transform: scale(1); }
+        }
+        .hero-bg-animate { animation: softFloat 25s infinite ease-in-out; }
+
+        .tab-btn.active { color: #40E0D0; border-bottom: 2px solid #40E0D0; }
+        .menu-category { display: none; }
+        .menu-category.active { display: grid; animation: slideUp 0.6s ease-out; }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .insta-card:hover .insta-overlay { opacity: 1; }
+        #mobile-menu { transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); transform: translateX(100%); }
+        #mobile-menu.open { transform: translateX(0); }
+    </style>
+</head>
+<body class="bg-oscuro text-white font-sans overflow-x-hidden">
+
+    <div class="cursor-dot" id="cursor-dot"></div>
+    <div class="cursor-outline" id="cursor-outline"></div>
+
+    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5">
+        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
+            <div class="h-14">
+                <a href="index.html">
+                    <img src="img/logo-crucero-norte.jpg" alt="Logo" class="h-full w-auto object-contain">
+                </a>
+            </div>
+            <div class="hidden md:flex items-center space-x-10 text-[11px] font-bold uppercase tracking-[0.3em]">
+                <a href="#inicio" class="hover:text-turquesa transition-colors">Inicio</a>
+                <a href="nosotros.html" class="hover:text-turquesa transition-colors">Nosotros</a>
+                <a href="#menu" class="hover:text-turquesa transition-colors">La Carta</a>
+                <a href="#experiencia" class="hover:text-turquesa transition-colors">Experiencia</a>
+                <a href="https://wa.me/56967058463" target="_blank" class="bg-naranja px-7 py-3 rounded-full hover:scale-105 transition-all shadow-lg shadow-naranja/20">Reservar</a>
+            </div>
+            <button onclick="toggleMenu()" class="md:hidden text-turquesa p-2">
+                <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16" /></svg>
+            </button>
+        </div>
+    </nav>
+
+    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-marino flex flex-col items-center justify-center space-y-8 text-2xl font-serif">
+        <button onclick="toggleMenu()" class="absolute top-8 right-8 text-turquesa text-4xl p-4">×</button>
+        <a href="#inicio" onclick="toggleMenu()">Inicio</a>
+        <a href="nosotros.html" onclick="toggleMenu()">Nosotros</a>
+        <a href="#menu" onclick="toggleMenu()">La Carta</a>
+        <a href="#experiencia" onclick="toggleMenu()">Experiencia</a>
+        <a href="https://wa.me/56967058463" class="text-naranja font-bold">Reservar</a>
+    </div>
+
+    <section id="inicio" class="relative h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1574096079513-d8259312b785?q=80&w=2000')] bg-cover bg-center hero-bg-animate opacity-40"></div>
+            <div class="absolute inset-0 bg-gradient-to-b from-marino/60 via-oscuro/40 to-oscuro"></div>
+        </div>
+        
+        <div class="relative z-10 text-center px-6">
+            <div id="rotator" class="h-6 mb-4 overflow-hidden">
+                <h2 class="text-fade active text-naranja font-bold tracking-[0.5em] uppercase text-[10px]">The Ultimate Sunset Spot</h2>
+                <h2 class="text-fade text-turquesa font-bold tracking-[0.5em] uppercase text-[10px]">Coctelería de Autor</h2>
+                <h2 class="text-fade text-white font-bold tracking-[0.5em] uppercase text-[10px]">Momentos Inolvidables</h2>
+            </div>
+            
+            <h1 class="text-6xl md:text-[10rem] font-serif leading-none mb-6" data-aos="zoom-out" data-aos-duration="2000">
+                Crucero <span class="italic text-turquesa block md:inline">Norte</span>
+            </h1>
+            
+            <p class="text-white/60 max-w-xl mx-auto text-lg font-light tracking-wide italic" data-aos="fade-up" data-aos-delay="800">
+                "Donde cada trago cuenta una historia y cada atardecer es un evento."
+            </p>
+            
+            <div class="mt-12 flex flex-col md:flex-row gap-5 justify-center" data-aos="fade-up" data-aos-delay="1000">
+                <a href="#menu" class="bg-white text-marino px-10 py-4 rounded-full font-bold hover:bg-turquesa hover:text-marino transition-all">Explorar Carta</a>
+                <a href="nosotros.html" class="border border-white/30 px-10 py-4 rounded-full font-bold hover:bg-white/10 transition-all">Nuestra Esencia</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="py-32 max-w-6xl mx-auto px-6">
+        <div class="text-center mb-20" data-aos="fade-up">
+            <span class="text-turquesa font-bold tracking-widest text-xs uppercase">Gastronomía & Coctelería</span>
+            <h2 class="text-5xl font-serif mt-2">Favoritos del Puerto</h2>
+            <div class="flex justify-center space-x-8 mt-10 border-b border-white/5 pb-4 overflow-x-auto no-scrollbar">
+                <button onclick="showCategory('drinks')" class="tab-btn active text-[10px] uppercase font-bold tracking-widest whitespace-nowrap px-4 py-2">Signature Drinks</button>
+                <button onclick="showCategory('food')" class="tab-btn text-white/40 text-[10px] uppercase font-bold tracking-widest whitespace-nowrap px-4 py-2">Platos Estrella</button>
+            </div>
+        </div>
+
+        <div id="drinks" class="menu-category active grid md:grid-cols-2 gap-12">
+            <div class="flex gap-6 items-center group">
+                <div class="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 border-2 border-turquesa/20">
+                    <img src="https://images.unsplash.com/photo-1536935338788-846bb9981813?q=80&w=300" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                </div>
+                <div class="flex-grow border-b border-white/5 pb-4">
+                    <div class="flex justify-between items-center mb-1">
+                        <h4 class="font-bold text-lg group-hover:text-turquesa transition-colors">Mojito Maracuyá</h4>
+                        <span class="text-naranja font-serif">$6.500</span>
+                    </div>
+                    <p class="text-white/40 text-xs uppercase tracking-tighter">Fresco • Frutal • El favorito del Sunset</p>
+                </div>
+            </div>
+            <div class="flex gap-6 items-center group">
+                <div class="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 border-2 border-turquesa/20">
+                    <img src="https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?q=80&w=300" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                </div>
+                <div class="flex-grow border-b border-white/5 pb-4">
+                    <div class="flex justify-between items-center mb-1">
+                        <h4 class="font-bold text-lg group-hover:text-turquesa transition-colors">Sour Norteño</h4>
+                        <span class="text-naranja font-serif">$5.900</span>
+                    </div>
+                    <p class="text-white/40 text-xs uppercase tracking-tighter">Receta de la casa • Toque de Jengibre</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="food" class="menu-category grid md:grid-cols-2 gap-12">
+            <div class="flex gap-6 items-center group">
+                <div class="w-24 h-24 rounded-full overflow-hidden flex-shrink-0 border-2 border-naranja/20">
+                    <img src="https://images.unsplash.com/photo-1563379091339-03b21bc4a4f8?q=80&w=300" class="w-full h-full object-cover">
+                </div>
+                <div class="flex-grow border-b border-white/5 pb-4">
+                    <div class="flex justify-between items-center mb-1">
+                        <h4 class="font-bold text-lg group-hover:text-naranja transition-colors">Tabla Crucero</h4>
+                        <span class="text-turquesa font-serif">$18.900</span>
+                    </div>
+                    <p class="text-white/40 text-xs uppercase tracking-tighter">Camarones • Calamares • Salsa especial</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="relative h-[70vh] overflow-hidden border-y border-white/5">
+        <div class="absolute inset-0 z-0 parallax-window bg-[url('https://images.unsplash.com/photo-1551218808-94e220e084d2?q=80&w=2000')]">
+            <div class="absolute inset-0 bg-marino/60 backdrop-blur-[2px]"></div>
+        </div>
+        <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-6" data-aos="zoom-in">
+            <h3 class="text-naranja font-bold tracking-[0.4em] uppercase text-xs mb-6">Antofagasta Nightlife</h3>
+            <h2 class="text-5xl md:text-8xl font-serif italic max-w-4xl leading-tight">Música, Brisa Marina <br>& Buenos Tiempos</h2>
+        </div>
+    </section>
+
+    <section id="experiencia" class="py-32 bg-marino/10">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-end mb-16">
+                <div>
+                    <h2 class="text-4xl font-serif leading-none">@crucero_norte</h2>
+                    <p class="text-turquesa text-xs font-bold uppercase tracking-widest mt-3 italic">Etiquétanos en tus momentos</p>
+                </div>
+                <a href="https://www.instagram.com/crucero_norte/" target="_blank" class="text-white/40 hover:text-turquesa text-xs font-bold uppercase tracking-[0.2em] transition-all">Seguir en Instagram →</a>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="insta-card relative h-80 rounded-3xl overflow-hidden cursor-pointer" data-aos="fade-up">
+                    <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?q=80&w=800" class="w-full h-full object-cover transition-transform duration-1000">
+                    <div class="insta-overlay absolute inset-0 bg-marino/90 opacity-0 transition-opacity flex items-center justify-center text-center p-6 text-white">
+                        <p class="text-xs font-bold tracking-widest uppercase">Night Vibes & Cocktails</p>
+                    </div>
+                </div>
+                <div class="insta-card relative h-80 rounded-3xl overflow-hidden cursor-pointer md:translate-y-8" data-aos="fade-up" data-aos-delay="100">
+                    <img src="https://images.unsplash.com/photo-1544148103-0773bf10d330?q=80&w=800" class="w-full h-full object-cover transition-transform duration-1000">
+                    <div class="insta-overlay absolute inset-0 bg-naranja/90 opacity-0 transition-opacity flex items-center justify-center text-white">
+                        <p class="text-xs font-bold tracking-widest uppercase">Perfect Sunset</p>
+                    </div>
+                </div>
+                <div class="insta-card relative h-80 rounded-3xl overflow-hidden cursor-pointer" data-aos="fade-up" data-aos-delay="200">
+                    <img src="https://images.unsplash.com/photo-1572116469696-31de0f17cc34?q=80&w=800" class="w-full h-full object-cover transition-transform duration-1000">
+                    <div class="insta-overlay absolute inset-0 bg-turquesa/90 opacity-0 transition-opacity flex items-center justify-center text-white">
+                        <p class="text-xs font-bold tracking-widest uppercase">Gastronomía Marina</p>
+                    </div>
+                </div>
+                <div class="insta-card relative h-80 rounded-3xl overflow-hidden cursor-pointer md:translate-y-8" data-aos="fade-up" data-aos-delay="300">
+                    <img src="https://images.unsplash.com/photo-1560624052-449f5ddf0c31?q=80&w=800" class="w-full h-full object-cover transition-transform duration-1000">
+                    <div class="insta-overlay absolute inset-0 bg-marino/90 opacity-0 transition-opacity flex items-center justify-center text-white">
+                        <p class="text-xs font-bold tracking-widest uppercase">Noches de Terraza</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="pt-32 pb-12 px-6 border-t border-white/5 bg-oscuro">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid md:grid-cols-4 gap-12 mb-20 text-center md:text-left">
+                <div class="col-span-2 space-y-8 flex flex-col items-center md:items-start">
+                    <img src="img/logo-crucero-norte.jpg" alt="Logo" class="h-24 object-contain">
+                    <div>
+                        <h4 class="text-2xl font-serif italic text-turquesa mb-4">El puerto de tus mejores noches.</h4>
+                        <p class="text-white/40 text-sm max-w-sm">Vive la mejor experiencia de Antofagasta frente al mar. Coctelería de autor y la mejor gastronomía local.</p>
+                    </div>
+                </div>
+
+                <div class="flex flex-col items-center space-y-4">
+                    <h5 class="text-naranja font-bold uppercase text-[10px] tracking-[0.3em]">Nuestra Carta</h5>
+                    <div class="bg-white p-2 rounded-xl w-32 h-32 flex items-center justify-center shadow-2xl">
+                        <img src="img/qr-menu.png" alt="Escanea la carta" class="w-full h-full object-contain">
+                    </div>
+                    <p class="text-[9px] text-white/40 uppercase tracking-widest">Escanea para ver precios</p>
+                </div>
+
+                <div class="space-y-6">
+                    <div>
+                        <h5 class="text-naranja font-bold uppercase text-[10px] tracking-[0.3em] mb-4">Ubicación</h5>
+                        <p class="text-white/60 text-sm">Chacalluta 92,<br>Antofagasta, Chile</p>
+                    </div>
+                    <div>
+                        <h5 class="text-naranja font-bold uppercase text-[10px] tracking-[0.3em] mb-4">Horarios</h5>
+                        <p class="text-white/60 text-sm italic">Mar - Jue: 17:30 - 01:00<br>Vie - Sáb: 13:00 - 02:30<br>Dom: 13:00 - 18:00</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-white/5 text-[10px] uppercase tracking-widest text-white/20 gap-4">
+                <span>© 2024 Crucero Norte Restobar | Antofagasta</span>
+                <div class="flex space-x-6">
+                    <a href="https://www.instagram.com/crucero_norte/" target="_blank" class="hover:text-turquesa transition-colors">Instagram</a>
+                    <a href="#" class="hover:text-turquesa transition-colors">Facebook</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/56967058463" target="_blank" class="fixed bottom-10 right-10 z-50 bg-[#25D366] p-5 rounded-full shadow-2xl hover:scale-110 transition-transform shadow-[#25D366]/20">
+        <svg class="w-6 h-6 fill-white" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.588-5.946 0-6.556 5.332-11.891 11.891-11.891 3.181 0 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.481 8.403 0 6.556-5.332 11.891-11.891 11.891-2.01 0-3.987-.512-5.747-1.483l-6.247 1.601zm6.136-4.363l.349.207c1.42.844 3.076 1.289 4.778 1.289 5.291 0 9.591-4.301 9.591-9.591s-4.3-9.591-9.591-9.591c-5.29 0-9.59 4.301-9.59 9.591 0 1.942.585 3.834 1.689 5.438l.228.331-.99 3.618 3.736-.957z"/></svg>
+    </a>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ 
+            duration: 1500, 
+            once: false,
+            easing: 'ease-out-quart'
+        });
+
+        const dot = document.getElementById("cursor-dot");
+        const outline = document.getElementById("cursor-outline");
+        
+        window.addEventListener("mousemove", (e) => {
+            const posX = e.clientX;
+            const posY = e.clientY;
+            dot.style.left = `${posX}px`;
+            dot.style.top = `${posY}px`;
+            outline.animate({ left: `${posX}px`, top: `${posY}px` }, { duration: 500, fill: "forwards" });
+        });
+
+        document.querySelectorAll('a, button, .insta-card').forEach(el => {
+            el.addEventListener('mouseenter', () => outline.classList.add('cursor-active'));
+            el.addEventListener('mouseleave', () => outline.classList.remove('cursor-active'));
+        });
+
+        const phrases = document.querySelectorAll('.text-fade');
+        let current = 0;
+        setInterval(() => {
+            phrases[current].classList.remove('active');
+            current = (current + 1) % phrases.length;
+            phrases[current].classList.add('active');
+        }, 4000);
+
+        function toggleMenu() {
+            document.getElementById('mobile-menu').classList.toggle('open');
+        }
+
+        function showCategory(id) {
+            document.querySelectorAll('.menu-category').forEach(cat => cat.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('text-white/40');
+            });
+            document.getElementById(id).classList.add('active');
+            event.currentTarget.classList.add('active');
+            event.currentTarget.classList.remove('text-white/40');
+        }
+    </script>
+</body>
+</html>
