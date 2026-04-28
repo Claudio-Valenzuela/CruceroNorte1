@@ -81,8 +81,177 @@ body {
     border-color: rgba(249, 160, 63, 0.45);
 }
 
+.carta-card {
+    display: block;
+    border: 0.5px solid rgba(255, 255, 255, 0.12);
+    border-radius: 2rem;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.03);
+    transition: transform 0.5s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.carta-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(249, 160, 63, 0.3);
+    box-shadow: 0 32px 80px rgba(0, 0, 0, 0.25);
+}
+
+.carta-card-image {
+    position: relative;
+    min-height: 20rem;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.8s ease, filter 0.8s ease;
+    filter: brightness(0.45) saturate(0.8);
+}
+
+.carta-card:hover .carta-card-image {
+    transform: scale(1.05);
+    filter: brightness(0.55) saturate(0.9);
+}
+
+.carta-card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 7rem;
+}
+
+.carta-card-action {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.85rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
+    padding: 0.75rem 1rem;
+    border-radius: 999px;
+    width: fit-content;
+    margin-top: auto;
+    transition: background 0.35s ease, border-color 0.35s ease;
+}
+
+.carta-card:hover .carta-card-action {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(249, 160, 63, 0.35);
+}
+
+.carta-main-btn {
+    border-color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.88);
+}
+
+.carta-main-btn:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(249, 160, 63, 0.35);
+}
+
+.carta-watermark {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 6rem;
+    color: rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+    user-select: none;
+}
+
 .hero-action-accent:hover {
     color: var(--accent);
+}
+
+.nosotros-logo-overlay {
+    max-height: 100px;
+    opacity: 0.15;
+    filter: grayscale(1) brightness(3);
+    mix-blend-mode: lighten;
+    transition: opacity 0.4s ease, filter 0.4s ease;
+}
+
+.nav-start-link {
+    border: 1px solid rgba(249, 160, 63, 0.2);
+    border-radius: 9999px;
+    padding: 0.65rem 1rem;
+}
+
+.nav-start-link:hover {
+    border-color: rgba(249, 160, 63, 0.45);
+}
+
+.hero-subtitle {
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    color: rgba(255, 255, 255, 0.45);
+}
+
+.story-image {
+    border-radius: 2rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow: 0 40px 120px rgba(0, 0, 0, 0.25);
+}
+
+.story-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s ease, filter 1s ease;
+    filter: grayscale(0.55) contrast(0.95) brightness(0.95);
+}
+
+.story-image:hover img {
+    transform: scale(1.05);
+    filter: grayscale(0.15) contrast(1.02) brightness(1);
+}
+
+.value-number {
+    color: var(--accent);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    line-height: 0.85;
+    letter-spacing: 0.18em;
+}
+
+.rope-divider {
+    width: min(20rem, 80%);
+    height: 0.5px;
+    background: rgba(249, 160, 63, 0.3);
+    margin: 2.5rem auto;
+    border-radius: 99px;
+}
+
+.nautical-icon {
+    display: inline-block;
+    font-size: 16px;
+    line-height: 1;
+    margin-right: 0.75rem;
+    opacity: 0.85;
+    vertical-align: middle;
+}
+
+.spin-icon {
+    animation: spin-slow 24s linear infinite paused;
+}
+
+.spin-icon.visible {
+    animation-play-state: running;
+}
+
+@keyframes spin-slow {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.section-secondary {
+    background: #001F4F;
+}
+
+.section-secondary .footer-copy,
+.section-secondary .social-links a,
+.section-secondary .text-white\/40 {
+    color: rgba(255, 255, 255, 0.55);
 }
 
 .cursor-dot {

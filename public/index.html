@@ -309,10 +309,12 @@
         </div>
     </section>
 
+    <div class="rope-divider"></div>
+
     <section id="menu" class="py-32 max-w-6xl mx-auto px-6">
         <div class="text-center mb-20" data-aos="fade-up">
             <span class="text-white/40 font-semibold tracking-[0.4em] uppercase text-[10px]">Gastronomía & Mixología</span>
-            <h2 class="text-4xl md:text-6xl font-serif font-semibold uppercase mt-4 tracking-[0.3em]">Favoritos</h2>
+            <h2 class="text-4xl md:text-6xl font-serif font-semibold uppercase mt-4 tracking-[0.3em]"><span class="nautical-icon spin-icon">☸️</span>Favoritos</h2>
             <div class="flex justify-center space-x-8 mt-10 border-b border-white/5 pb-4">
                 <button onclick="showCategory('drinks')" class="tab-btn active text-[10px] uppercase font-semibold tracking-[0.3em] text-white">Drinks</button>
                 <button onclick="showCategory('food')" class="tab-btn text-white/40 text-[10px] uppercase font-semibold tracking-[0.3em]">Food</button>
@@ -347,11 +349,50 @@
         </div>
     </section>
 
-    <section id="experiencia" class="py-32 bg-marino/10 border-y border-white/5">
+    <section id="carta" class="py-32 bg-oscuro">
+        <div class="max-w-7xl mx-auto px-6 relative overflow-hidden">
+            <div class="text-center mb-20" data-aos="fade-up">
+                <h2 class="text-4xl md:text-6xl font-display font-bold uppercase tracking-[1.2em] text-white/20">LA CARTA</h2>
+                <p class="text-white/40 text-xs uppercase tracking-[0.4em] mt-4">Explora nuestras categorías principales</p>
+            </div>
+
+            <div class="grid gap-6 md:grid-cols-3">
+                <a href="https://www.canva.com/design/DAHAMzSGOmQ/" target="_blank" class="carta-card group" data-aos="fade-up">
+                    <div class="carta-card-image" style="background-image: url('https://images.unsplash.com/photo-1510626176961-4b78a4f4df48?q=80&w=1200');"></div>
+                    <div class="carta-card-body">
+                        <p class="text-white/60 text-[11px] uppercase tracking-[0.3em] mb-4">Coctelería de Autor</p>
+                        <span class="carta-card-action">Ver Detalle</span>
+                    </div>
+                </a>
+                <a href="https://www.canva.com/design/DAHAMzSGOmQ/" target="_blank" class="carta-card group" data-aos="fade-up" data-aos-delay="100">
+                    <div class="carta-card-image" style="background-image: url('https://images.unsplash.com/photo-1498654896293-37aacf113fd9?q=80&w=1200');"></div>
+                    <div class="carta-card-body">
+                        <p class="text-white/60 text-[11px] uppercase tracking-[0.3em] mb-4">Gastronomía del Mar</p>
+                        <span class="carta-card-action">Ver Detalle</span>
+                    </div>
+                </a>
+                <a href="https://www.canva.com/design/DAHAMzSGOmQ/" target="_blank" class="carta-card group" data-aos="fade-up" data-aos-delay="200">
+                    <div class="carta-card-image" style="background-image: url('https://images.unsplash.com/photo-1540189549336-e6e99c3679fe?q=80&w=1200');"></div>
+                    <div class="carta-card-body">
+                        <p class="text-white/60 text-[11px] uppercase tracking-[0.3em] mb-4">Tablas del Puerto</p>
+                        <span class="carta-card-action">Ver Detalle</span>
+                    </div>
+                </a>
+            </div>
+
+            <div class="mt-16 text-center" data-aos="fade-up" data-aos-delay="300">
+                <a href="https://www.canva.com/design/DAHAMzSGOmQ/" target="_blank" class="ghost-btn carta-main-btn">EXPLORAR CARTA COMPLETA</a>
+            </div>
+
+            <div class="carta-watermark">☸️</div>
+        </div>
+    </section>
+
+    <section id="experiencia" class="py-32 section-secondary border-y border-white/5">
         <div class="max-w-7xl mx-auto px-6">
             <div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6 text-center md:text-left">
                 <div>
-                    <h2 class="text-4xl font-serif font-bold uppercase tracking-widest">@crucero_norte</h2>
+                    <h2 class="text-4xl font-serif font-bold uppercase tracking-widest"><span class="nautical-icon spin-icon">☸️</span>@crucero_norte</h2>
                     <p class="text-white/40 text-[10px] uppercase tracking-[0.4em] mt-3">Vive la experiencia en el puerto</p>
                 </div>
                 <a href="https://www.instagram.com/crucero_norte/" target="_blank" class="text-white/40 hover:text-white text-[10px] font-bold uppercase tracking-[0.2em] transition-all pb-1 border-b border-white/10">Instagram →</a>
@@ -386,7 +427,7 @@
         </div>
     </section>
 
-    <footer class="footer-minimal">
+    <footer class="footer-minimal section-secondary">
         <div class="footer-inner max-w-7xl mx-auto">
             <div class="flex items-center gap-4">
                 <img src="img/logo-crucero-norte.jpg" alt="Logo" class="h-10">
@@ -429,6 +470,15 @@
         };
         window.addEventListener('scroll', onScroll);
         onScroll();
+
+        const spinIcons = document.querySelectorAll('.spin-icon');
+        const spinObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) entry.target.classList.add('visible');
+                else entry.target.classList.remove('visible');
+            });
+        }, { threshold: 0.4 });
+        spinIcons.forEach(icon => spinObserver.observe(icon));
     </script>
 </body>
 </html>
