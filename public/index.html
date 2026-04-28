@@ -8,6 +8,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Oswald:wght@400;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
     
     <script>
         tailwind.config = {
@@ -30,7 +31,13 @@
 
     <style>
         html { scroll-behavior: smooth; }
-        .glass { background: rgba(5, 10, 15, 0.8); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); }
+        .glass { background: rgba(5, 10, 15, 0.55); backdrop-filter: blur(22px); -webkit-backdrop-filter: blur(22px); }
+        .brand-logo img { max-height: 40px; width: auto; display: block; }
+        .hero-center { position: relative; z-index: 10; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 0 1.5rem; }
+        .hero-actions { margin-top: 3rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+        .hero-actions a { font-size: 0.75rem; letter-spacing: 0.35em; padding: 0.8rem 1.5rem; border-radius: 9999px; border: 1px solid rgba(255,255,255,0.15); }
+        .hero-note { position: absolute; bottom: 3rem; left: 50%; transform: translateX(-50%); max-width: 42rem; width: calc(100% - 3rem); font-size: 0.875rem; letter-spacing: 0.45em; color: rgba(255,255,255,0.32); font-weight: 300; text-transform: uppercase; }
+        .hero-overlay { inset: 0; position: absolute; background: linear-gradient(180deg, rgba(10, 26, 47, 0.18) 0%, rgba(5, 10, 15, 0.65) 100%); }
         
         /* Cursor Premium */
         @media (min-width: 768px) {
@@ -88,16 +95,16 @@
     <div class="cursor-outline" id="cursor-outline"></div>
 
     <nav class="fixed top-0 w-full z-50 glass border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <div class="h-12">
-                <a href="index.html"><img src="../img/logo-crucero-norte.jpg" alt="Logo" class="h-full w-auto object-contain"></a>
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-start">
+            <div class="brand-logo">
+                <a href="index.html"><img src="img/logo-crucero-norte.jpg" alt="Logo"></a>
             </div>
-            <div class="hidden md:flex items-center space-x-10 text-[10px] font-bold uppercase tracking-[0.3em]">
-                <a href="#inicio" class="hover:text-turquesa transition-colors">Inicio</a>
-                <a href="nosotros.html" class="hover:text-turquesa transition-colors">Nosotros</a>
-                <a href="#menu" class="hover:text-turquesa transition-colors">La Carta</a>
-                <a href="#experiencia" class="hover:text-turquesa transition-colors">Experiencia</a>
-                <a href="https://wa.me/56967058463" target="_blank" class="bg-naranja px-7 py-3 rounded-full hover:scale-105 transition-all shadow-lg">Reservar</a>
+            <div class="hidden md:flex items-center space-x-10 text-[10px] font-medium uppercase tracking-[0.5em]">
+                <a href="#inicio" class="text-white/70 hover:text-white transition-colors">Inicio</a>
+                <a href="nosotros.html" class="text-white/70 hover:text-white transition-colors">Nosotros</a>
+                <a href="#menu" class="text-white/70 hover:text-white transition-colors">La Carta</a>
+                <a href="#experiencia" class="text-white/70 hover:text-white transition-colors">Experiencia</a>
+                <a href="https://wa.me/56967058463" target="_blank" class="text-white/70 hover:text-white transition-all">Reservar</a>
             </div>
             <button onclick="toggleMenu()" class="md:hidden text-turquesa text-2xl">☰</button>
         </div>
@@ -112,33 +119,32 @@
         <a href="https://wa.me/56967058463" class="text-naranja font-bold">Reservar</a>
     </div>
 
-    <section id="inicio" class="relative h-screen flex items-center justify-center overflow-hidden">
+    <section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div class="absolute inset-0">
-            <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1574096079513-d8259312b785?q=80&w=2000')] bg-cover bg-center hero-bg-animate opacity-30"></div>
-            <div class="absolute inset-0 bg-gradient-to-b from-marino/40 to-oscuro"></div>
+            <div class="absolute inset-0 hero-bg-animate opacity-30" style="background-image: url('img/hero-bg.png'); background-attachment: fixed !important; background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important;"></div>
+            <div class="absolute inset-0" style="background: linear-gradient(180deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.2) 40%, rgba(0,0,0,0.2) 60%, rgba(0,0,0,0.85) 100%);"></div>
         </div>
         
-        <div class="relative z-10 text-center px-6 max-w-4xl">
-            <div id="rotator" class="h-4 mb-4 overflow-hidden">
-                <h2 class="text-fade active text-naranja font-bold tracking-[0.5em] uppercase text-[9px]">The Ultimate Sunset Spot</h2>
-                <h2 class="text-fade text-turquesa font-bold tracking-[0.5em] uppercase text-[9px]">Coctelería de Autor</h2>
-                <h2 class="text-fade text-white font-bold tracking-[0.5em] uppercase text-[9px]">Momentos Inolvidables</h2>
+        <div class="hero-center">
+            <div class="max-w-4xl flex flex-col items-center justify-center h-full text-center">
+                <div id="rotator" class="h-4 mb-4 overflow-hidden">
+                    <h2 class="text-fade active text-white/40 tracking-[0.5em] uppercase text-[9px]">The Ultimate Sunset Spot</h2>
+                    <h2 class="text-fade text-white/40 tracking-[0.5em] uppercase text-[9px]">Coctelería de Autor</h2>
+                    <h2 class="text-fade text-white/40 tracking-[0.5em] uppercase text-[9px]">Momentos Inolvidables</h2>
+                </div>
+
+                <h1 class="text-5xl md:text-8xl font-sans font-bold uppercase tracking-[0.5em] mb-8 leading-tight text-white/20" data-aos="fade-up" data-aos-duration="2000">
+                    Crucero Norte
+                </h1>
+
+                <div class="w-10 h-[1px] bg-white/30 mx-auto mb-8"></div>
+
+                <div class="hero-actions mt-12 flex flex-col md:flex-row items-center justify-center gap-4">
+                    <a href="#menu" class="text-white/50 border border-white/20 bg-transparent hover:text-white hover:border-white/40">Explorar Carta</a>
+                    <a href="nosotros.html" class="text-white/50 border border-white/20 bg-transparent hover:text-white hover:border-white/40">Nuestra Esencia</a>
+                </div>
             </div>
-            
-            <h1 class="text-5xl md:text-8xl font-serif font-bold uppercase tracking-[0.2em] mb-8 leading-tight" data-aos="fade-up" data-aos-duration="2000">
-                Crucero <span class="text-turquesa">Norte</span>
-            </h1>
-            
-            <div class="w-10 h-[1px] bg-white/30 mx-auto mb-8"></div>
-            
-            <p class="text-white/50 text-xs md:text-sm tracking-[0.3em] uppercase leading-relaxed mb-12 max-w-lg mx-auto" data-aos="fade-up" data-aos-delay="500">
-                Donde cada trago cuenta una historia <br class="hidden md:block"> y cada atardecer es un evento único.
-            </p>
-            
-            <div class="flex flex-col md:flex-row gap-6 justify-center items-center" data-aos="fade-up" data-aos-delay="800">
-                <a href="#menu" class="bg-white text-marino px-12 py-4 rounded-full font-bold hover:bg-turquesa transition-all uppercase tracking-widest text-[10px]">Explorar Carta</a>
-                <a href="nosotros.html" class="text-white/40 hover:text-white transition-all uppercase tracking-widest text-[10px] border-b border-white/10 pb-1">Nuestra Esencia</a>
-            </div>
+            <div class="hero-note">Donde cada trago cuenta una historia y cada atardecer es un evento único.</div>
         </div>
     </section>
 

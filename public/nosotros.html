@@ -30,7 +30,8 @@
 
     <style>
         html { scroll-behavior: smooth; }
-        .glass { background: rgba(5, 10, 15, 0.8); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); }
+        .glass { background: rgba(5, 10, 15, 0.7); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px); }
+        .brand-logo img { max-height: 40px; width: auto; }
         .parallax-window { background-attachment: fixed; background-position: center; background-size: cover; }
         
         @media (min-width: 768px) {
@@ -57,9 +58,9 @@
 
     <nav class="fixed top-0 w-full z-50 glass border-b border-white/5">
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <div class="h-14">
+            <div class="h-14 brand-logo">
                 <a href="index.html">
-                    <img src="../img/logo-crucero-norte.jpg" alt="Logo" class="h-full w-auto object-contain">
+                    <img src="img/logo-crucero-norte.jpg" alt="Logo" class="object-contain">
                 </a>
             </div>
             <div class="hidden md:flex items-center space-x-10 text-[11px] font-bold uppercase tracking-[0.3em]">
