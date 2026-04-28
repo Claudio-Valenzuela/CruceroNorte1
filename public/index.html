@@ -6,7 +6,7 @@
     <title>Crucero Norte | Restobar Antofagasta</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     
@@ -16,11 +16,11 @@
                 extend: {
                     fontFamily: {
                         'sans': ['Montserrat', 'sans-serif'],
-                        'serif': ['Playfair Display', 'serif'],
+                        'display': ['Outfit', 'sans-serif'],
+                        'serif': ['Montserrat', 'sans-serif'],
                     },
                     colors: {
-                        'turquesa': '#40E0D0',
-                        'naranja': '#E9692C',
+                        'accent': '#f9a03f',
                         'marino': '#0A1A2F',
                         'oscuro': '#050A0F',
                     }
@@ -42,13 +42,14 @@
         .page-nav {
             background: transparent;
             border-bottom: none;
-            transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease;
+            transition: background 0.4s ease, backdrop-filter 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
         }
 
         .page-nav.scrolled {
             background: rgba(0, 0, 0, 0.78);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(18px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 18px 60px rgba(0, 0, 0, 0.22);
         }
 
         .page-nav .brand-logo img {
@@ -58,8 +59,10 @@
         }
 
         .page-nav .nav-link {
-            color: rgba(255, 255, 255, 0.7);
-            transition: color 0.3s ease;
+            color: rgba(255, 255, 255, 0.72);
+            transition: color 0.25s ease;
+            letter-spacing: 0.2em;
+            font-weight: 300;
         }
 
         .page-nav .nav-link:hover {
@@ -80,10 +83,11 @@
         }
 
         .hero-title {
-            letter-spacing: 0.5em;
+            letter-spacing: 0.8em;
             text-transform: uppercase;
             opacity: 0.15;
             color: rgba(255, 255, 255, 1);
+            font-family: 'Outfit', sans-serif;
             backdrop-filter: blur(12px);
             text-shadow: none;
         }
@@ -97,21 +101,23 @@
         }
 
         .hero-actions a {
-            color: rgba(255, 255, 255, 0.45);
-            border: 0.5px solid rgba(255, 255, 255, 0.2);
+            color: rgba(255, 255, 255, 0.55);
+            border: 0.5px solid rgba(255, 255, 255, 0.18);
             background: transparent;
-            padding: 0.75rem 1.25rem;
+            padding: 0.85rem 1.3rem;
             border-radius: 9999px;
-            transition: all 0.7s ease;
-            letter-spacing: 0.3em;
+            transition: all 0.35s ease;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
             font-size: 0.75rem;
+            font-weight: 300;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .hero-actions a:hover {
             color: white;
             background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.35);
+            border-color: rgba(249, 160, 63, 0.45);
         }
 
         .hero-note {
@@ -254,7 +260,7 @@
             <div class="brand-logo">
                 <a href="index.html"><img src="img/logo-crucero-norte.jpg" alt="Logo"></a>
             </div>
-            <div class="hidden md:flex items-center space-x-10 text-[10px] font-medium uppercase tracking-[0.3em]">
+            <div class="hidden md:flex items-center space-x-10 text-[10px] font-light uppercase tracking-[0.2em]">
                 <a href="#inicio" class="nav-link">Inicio</a>
                 <a href="nosotros.html" class="nav-link">Nosotros</a>
                 <a href="#menu" class="nav-link">La Carta</a>
@@ -265,13 +271,13 @@
         </div>
     </nav>
 
-    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-marino flex flex-col items-center justify-center space-y-8 text-2xl font-serif uppercase tracking-widest text-center">
+    <div id="mobile-menu" class="fixed inset-0 z-[60] bg-marino flex flex-col items-center justify-center space-y-8 text-2xl font-light uppercase tracking-[0.2em] text-center">
         <button onclick="toggleMenu()" class="absolute top-8 right-8 text-4xl p-4">×</button>
-        <a href="#inicio" onclick="toggleMenu()">Inicio</a>
-        <a href="nosotros.html" onclick="toggleMenu()">Nosotros</a>
-        <a href="#menu" onclick="toggleMenu()">La Carta</a>
-        <a href="#experiencia" onclick="toggleMenu()">Experiencia</a>
-        <a href="https://wa.me/56967058463" class="text-naranja font-bold">Reservar</a>
+        <a href="#inicio" onclick="toggleMenu()" class="text-white/70 hover:text-white">Inicio</a>
+        <a href="nosotros.html" onclick="toggleMenu()" class="text-white/70 hover:text-white">Nosotros</a>
+        <a href="#menu" onclick="toggleMenu()" class="text-white/70 hover:text-white">La Carta</a>
+        <a href="#experiencia" onclick="toggleMenu()" class="text-white/70 hover:text-white">Experiencia</a>
+        <a href="https://wa.me/56967058463" class="text-white/70 hover:text-[#f9a03f]">Reservar</a>
     </div>
 
     <section id="inicio" class="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -288,15 +294,15 @@
                     <h2 class="text-fade text-white/40 tracking-[0.5em] uppercase text-[9px]">Momentos Inolvidables</h2>
                 </div>
 
-                <h1 class="hero-title text-5xl md:text-8xl font-serif font-bold mb-8 leading-tight text-white/15" data-aos="fade-up" data-aos-duration="2000">
-                    Crucero Norte
+                <h1 class="hero-title font-display text-6xl md:text-9xl font-bold mb-6 leading-tight tracking-[0.8em] text-white/15" data-aos="fade-up" data-aos-duration="2000">
+                    CRUCERO NORTE
                 </h1>
 
-                <div class="w-10 h-[1px] bg-white/30 mx-auto mb-8"></div>
+                <div class="title-accent mx-auto mb-12"></div>
 
                 <div class="hero-actions mt-12 flex flex-col md:flex-row items-center justify-center gap-4">
-                    <a href="#menu">Explorar Carta</a>
-                    <a href="nosotros.html">Nuestra Esencia</a>
+                    <a href="#menu" class="ghost-btn">Explorar Carta</a>
+                    <a href="nosotros.html" class="ghost-btn">Nuestra Esencia</a>
                 </div>
             </div>
             <div class="hero-note">Donde cada trago cuenta una historia y cada atardecer es un evento único.</div>
