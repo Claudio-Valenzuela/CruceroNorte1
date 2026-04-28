@@ -15,7 +15,7 @@
                 extend: {
                     fontFamily: {
                         'sans': ['Montserrat', 'sans-serif'],
-                        'serif': ['Oswald', 'sans-serif'], // Oswald reemplaza a Playfair para los títulos
+                        'serif': ['Oswald', 'sans-serif'],
                     },
                     colors: {
                         'turquesa': '#40E0D0',
@@ -33,7 +33,6 @@
         .glass { background: rgba(5, 10, 15, 0.8); backdrop-filter: blur(15px); -webkit-backdrop-filter: blur(15px); }
         .parallax-window { background-attachment: fixed; background-position: center; background-size: cover; }
         
-        /* Cursor Premium */
         @media (min-width: 768px) {
             body { cursor: none; }
             a, button { cursor: none; }
@@ -60,7 +59,7 @@
         <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
             <div class="h-14">
                 <a href="index.html">
-                    <img src="img/logo-crucero-norte.jpg" alt="Logo" class="h-full w-auto object-contain">
+                    <img src="../img/logo-crucero-norte.jpg" alt="Logo" class="h-full w-auto object-contain">
                 </a>
             </div>
             <div class="hidden md:flex items-center space-x-10 text-[11px] font-bold uppercase tracking-[0.3em]">
@@ -142,7 +141,6 @@
             easing: 'ease-out-quart'
         });
 
-        // Cursor Logic
         const dot = document.getElementById("cursor-dot");
         const outline = document.getElementById("cursor-outline");
         window.addEventListener("mousemove", (e) => {
